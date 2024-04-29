@@ -48,4 +48,27 @@ const template = "Learn \${0} tagged templates to create custom \${1} literals f
 const highlighted = highlightKeywords(template, keywords);
 
 console.log(highlighted);
-//
+
+// Task 3: Multiline Tagged Template
+function multiline(strings, ...values) {
+    let string = strings[0];
+
+    if (string[0] === "\n") string = string.slice(1, -1);
+    if (string[string.length - 1] === "\n") string = string.slice(-2, 0);
+
+    const lines = string.split("\n");
+
+    for (let i = 0; i < lines.length; ++i) {
+        lines[i] = `${i + 1} ` + lines[i];
+    }
+
+    return lines.join("\n");
+}
+
+const code = multiline`
+function add(a, b) {
+    return a + b;
+}
+`;
+
+console.log(code);

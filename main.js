@@ -50,7 +50,7 @@ const highlighted = highlightKeywords(template, keywords);
 console.log(highlighted);
 
 // Task 3: Multiline Tagged Template
-function multiline(strings, ...values) {
+function multiline(strings) {
     let string = strings[0];
 
     if (string[0] === "\n") string = string.slice(1, -1);
@@ -72,3 +72,30 @@ function add(a, b) {
 `;
 
 console.log(code);
+
+// Task 4: Implementing Debounce Function
+function debounce(func, delay) {
+    let timeoutId;
+
+    return value => {
+        clearTimeout(timeoutId);
+
+        timeoutId = setTimeout(() => {
+            func(value);
+        }, delay);
+    }
+}
+
+function debouncedSearch(query) {
+    // Perform search operation with the query
+    console.log("Searching for:", query);
+}
+
+const debouncedSearchHandler = debounce(debouncedSearch, 300);
+
+const inputElement = document.getElementById("search-input");
+inputElement.addEventListener("input", event => {
+    debouncedSearchHandler(event.target.value);
+});
+
+

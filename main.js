@@ -91,12 +91,12 @@ function debouncedSearch(query) {
     console.log("Searching for:", query);
 }
 
-const debouncedSearchHandler = debounce(debouncedSearch, 300);
-
-const inputElement = document.getElementById("search-input");
-inputElement.addEventListener("input", event => {
-    debouncedSearchHandler(event.target.value);
-});
+// const debouncedSearchHandler = debounce(debouncedSearch, 300);
+//
+// const inputElement = document.getElementById("search-input");
+// inputElement.addEventListener("input", event => {
+//     debouncedSearchHandler(event.target.value);
+// });
 
 // Task 5: Implementing Throttle Function
 let lastExecutionTime = 0;
@@ -117,6 +117,27 @@ function onScroll(event) {
     console.log("Scroll event:", event);
 }
 
-const throttledScrollHandler = throttle(onScroll, 1000);
+// const throttledScrollHandler = throttle(onScroll, 1000);
+//
+// window.addEventListener("scroll", throttledScrollHandler);
 
-window.addEventListener("scroll", throttledScrollHandler);
+// Task 6: Curring Function Implementation
+function curry(func, arity, ...args) {
+    if (args.length >= arity) return func(...args);
+
+    return function(...nextArgs) {
+        return curry(func, arity, ...args, ...nextArgs);
+    };
+}
+
+function multiply(a, b, c) {
+    return a * b * c;
+}
+
+const curriedMultiply = curry(multiply, 3);
+
+const step1 = curriedMultiply(2); // Returns a curried function
+const step2 = step1(3); // Returns a curried function
+const result = step2(4); // Returns the final result: 2 * 3 * 4 = 24
+
+console.log("Result:", result); // Expected: 24

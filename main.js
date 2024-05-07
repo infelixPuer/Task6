@@ -98,4 +98,25 @@ inputElement.addEventListener("input", event => {
     debouncedSearchHandler(event.target.value);
 });
 
+// Task 5: Implementing Throttle Function
+let lastExecutionTime = 0;
+function throttle(func, interval) {
+    return value => {
+        const currentTime = Date.now();
 
+        if (currentTime - lastExecutionTime >= interval) {
+            console.log(`Last execution time: ${lastExecutionTime}\nCurrent time: ${currentTime}\nElapsed time: ${currentTime - lastExecutionTime}`)
+            func(value);
+            lastExecutionTime = currentTime;
+        }
+    };
+}
+
+function onScroll(event) {
+    // Handle scroll event
+    console.log("Scroll event:", event);
+}
+
+const throttledScrollHandler = throttle(onScroll, 1000);
+
+window.addEventListener("scroll", throttledScrollHandler);
